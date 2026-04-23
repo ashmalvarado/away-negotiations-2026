@@ -1,4 +1,29 @@
-
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f3;
+    --color-border-tertiary: rgba(0,0,0,0.12);
+    --color-border-secondary: rgba(0,0,0,0.25);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --font-sans: 'DM Sans', sans-serif;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: #faf9f7;
+    min-height: 100vh;
+  }
+</style>
+</head>
+<body>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -823,3 +848,5 @@ function answer(qid, btn, correct, msg) {
   fb.className = 'quiz-feedback show ' + (correct ? 'win' : 'lose');
 }
 </script>
+</body>
+</html>
