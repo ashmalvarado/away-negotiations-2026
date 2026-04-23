@@ -1,0 +1,825 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.neg-root {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--color-text-primary);
+  max-width: 680px;
+  padding: 0 0 2rem;
+}
+
+.header {
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.header-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.header-title em {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.header-meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: var(--color-background-secondary);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 0.5px solid var(--color-border-tertiary);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  margin-bottom: 1.75rem;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 0.5px solid var(--color-border-tertiary);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.nav-tab:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+.nav-tab.active {
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  border-color: var(--color-text-primary);
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.card-label.teal { color: #0F6E56; }
+.card-label.coral { color: #993C1D; }
+.card-label.purple { color: #534AB7; }
+.card-label.amber { color: #854F0B; }
+.card-label.blue { color: #185FA5; }
+
+.card-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+}
+
+.card-body {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.card-body ul {
+  padding-left: 1.1rem;
+  margin-top: 6px;
+}
+.card-body ul li { margin-bottom: 4px; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; margin-bottom: 1rem; }
+
+.stat-card {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 14px 16px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--color-text-primary);
+}
+.stat-label { font-size: 12px; color: var(--color-text-secondary); }
+
+.framework-box {
+  border-left: 3px solid;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: var(--color-background-secondary);
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+}
+.framework-box.teal { border-color: #1D9E75; }
+.framework-box.coral { border-color: #D85A30; }
+.framework-box.purple { border-color: #7F77DD; }
+.framework-box.blue { border-color: #378ADD; }
+
+.fw-term {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--color-text-primary);
+}
+.fw-def { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.fw-example {
+  font-size: 12px;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: var(--color-background-primary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  border: 0.5px solid var(--color-border-tertiary);
+}
+
+.scenario-card {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.scenario-header {
+  background: var(--color-background-secondary);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+.scenario-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.tag-vendor { background: #E1F5EE; color: #0F6E56; }
+.tag-agency { background: #EEEDFE; color: #534AB7; }
+.tag-platform { background: #FAEEDA; color: #854F0B; }
+.tag-influencer { background: #FAECE7; color: #993C1D; }
+
+.scenario-title { font-size: 14px; font-weight: 500; flex: 1; margin: 0 10px; }
+.scenario-toggle { font-size: 16px; color: var(--color-text-secondary); transition: transform 0.2s; }
+.scenario-toggle.open { transform: rotate(180deg); }
+
+.scenario-body {
+  display: none;
+  padding: 16px;
+  border-top: 0.5px solid var(--color-border-tertiary);
+}
+.scenario-body.open { display: block; }
+
+.scenario-context { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 12px; }
+
+.scenario-block {
+  margin-bottom: 10px;
+}
+.scenario-block-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 4px; }
+.scenario-block-content { font-size: 13px; line-height: 1.6; color: var(--color-text-primary); }
+
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.do-box { background: #EAF3DE; border-radius: var(--border-radius-md); padding: 12px; }
+.dont-box { background: #FCEBEB; border-radius: var(--border-radius-md); padding: 12px; }
+.do-label { font-size: 11px; font-weight: 700; color: #3B6D11; margin-bottom: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+.dont-label { font-size: 11px; font-weight: 700; color: #A32D2D; margin-bottom: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+.do-item { font-size: 13px; color: #27500A; line-height: 1.6; }
+.dont-item { font-size: 13px; color: #791F1F; line-height: 1.6; }
+
+.phrase-card {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.phrase-icon {
+  font-size: 14px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.p-open { background: #E1F5EE; color: #0F6E56; }
+.p-anchor { background: #EEEDFE; color: #534AB7; }
+.p-push { background: #FAEEDA; color: #854F0B; }
+.p-close { background: #E6F1FB; color: #185FA5; }
+
+.phrase-text { font-size: 13px; line-height: 1.6; color: var(--color-text-primary); }
+.phrase-sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+
+.quiz-q { font-size: 14px; font-weight: 500; margin-bottom: 10px; color: var(--color-text-primary); }
+.quiz-opts { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.quiz-opt {
+  font-size: 13px;
+  padding: 9px 14px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-primary);
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: all 0.15s;
+  line-height: 1.5;
+}
+.quiz-opt:hover { background: var(--color-background-secondary); }
+.quiz-opt.correct { background: #EAF3DE; border-color: #639922; color: #27500A; }
+.quiz-opt.wrong { background: #FCEBEB; border-color: #E24B4A; color: #791F1F; }
+
+.quiz-feedback {
+  display: none;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-md);
+  line-height: 1.6;
+  margin-top: 4px;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.win { background: #EAF3DE; color: #27500A; }
+.quiz-feedback.lose { background: #FCEBEB; color: #791F1F; }
+
+.prep-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+.prep-step:last-child { border-bottom: none; }
+.prep-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.prep-content { flex: 1; }
+.prep-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.prep-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.checklist { list-style: none; }
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+.checklist li:last-child { border-bottom: none; }
+.check-box {
+  width: 16px; height: 16px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 4px;
+  flex-shrink: 0;
+  cursor: pointer;
+  background: var(--color-background-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  transition: all 0.15s;
+}
+.check-box.checked { background: var(--color-text-primary); border-color: var(--color-text-primary); color: var(--color-background-primary); }
+
+.nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--color-border-tertiary);
+}
+
+.nav-btn {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 0.5px solid var(--color-border-secondary);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nav-btn:hover { background: var(--color-background-secondary); }
+.nav-btn.primary {
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  border-color: var(--color-text-primary);
+}
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+.progress-dots { display: flex; gap: 5px; }
+.progress-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-border-tertiary);
+  transition: background 0.2s;
+}
+.progress-dot.done { background: var(--color-text-secondary); }
+.progress-dot.active { background: var(--color-text-primary); width: 16px; border-radius: 3px; }
+
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.25rem 0; }
+
+.tip-box {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.tip-label { font-weight: 600; color: var(--color-text-primary); }
+
+.badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 0.5px solid var(--color-border-tertiary);
+  color: var(--color-text-secondary);
+}
+</style>
+
+<div class="neg-root">
+  <h2 class="sr-only">D2C Negotiation Skills: Peer Learning Session — interactive course covering frameworks, scenarios, and practice exercises for junior team members</h2>
+
+  <div class="header">
+    <div class="header-eyebrow">Peer Learning Series &middot; Skills Elevation</div>
+    <div class="header-title">The art of <em>the deal</em><br>for D2C teams</div>
+    <div class="header-meta">
+      <span class="meta-pill">60–90 min session</span>
+      <span class="meta-pill">5 modules</span>
+      <span class="meta-pill">Interactive scenarios</span>
+      <span class="meta-pill">Take-home toolkit</span>
+    </div>
+  </div>
+
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="goTo(0)">Overview</button>
+    <button class="nav-tab" onclick="goTo(1)">Frameworks</button>
+    <button class="nav-tab" onclick="goTo(2)">Preparation</button>
+    <button class="nav-tab" onclick="goTo(3)">Scenarios</button>
+    <button class="nav-tab" onclick="goTo(4)">Phrases + Moves</button>
+    <button class="nav-tab" onclick="goTo(5)">Quiz</button>
+    <button class="nav-tab" onclick="goTo(6)">Takeaways</button>
+  </div>
+
+  <!-- Section 0: Overview -->
+  <div class="section active" id="sec0">
+    <div class="section-title">Why negotiation matters in D2C</div>
+    <div class="section-subtitle">In direct-to-consumer, you negotiate constantly — with vendors, agencies, platforms, logistics partners, and even internally. The best negotiators don't just save money; they build better relationships and unlock faster growth.</div>
+
+    <div class="grid-2">
+      <div class="stat-card"><div class="stat-num">3–15%</div><div class="stat-label">average COGS reduction from skilled vendor negotiation</div></div>
+      <div class="stat-card"><div class="stat-num">30%</div><div class="stat-label">of D2C brands say platform fee negotiation is their biggest missed opportunity</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label teal">Where D2C teams negotiate</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Suppliers & manufacturers</strong> — MOQs, unit pricing, lead times, payment terms</li>
+          <li><strong>3PLs & logistics partners</strong> — fulfillment costs, SLAs, zone skipping</li>
+          <li><strong>Agencies</strong> — creative, media buying, SEO retainers and scope</li>
+          <li><strong>Influencers & creators</strong> — rates, deliverables, exclusivity, usage rights</li>
+          <li><strong>Tech platforms & SaaS</strong> — Shopify Plus terms, ESP pricing, ad platform credits</li>
+          <li><strong>Retail & wholesale buyers</strong> — margins, markdown allowances, returns</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label coral">What holds junior folx back</div>
+      <div class="card-body">
+        <ul>
+          <li>Treating the first offer as the final offer</li>
+          <li>Negotiating on price alone — missing total value</li>
+          <li>Lacking a BATNA (and feeling powerless because of it)</li>
+          <li>Rushing to fill silence — giving away information</li>
+          <li>Negotiating live without preparation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box"><span class="tip-label">Session goal:</span> By the end of this session, you'll have a mental framework, a prep checklist, real D2C scenario practice, and a library of phrases to use in your next negotiation.</div>
+  </div>
+
+  <!-- Section 1: Frameworks -->
+  <div class="section" id="sec1">
+    <div class="section-title">The core frameworks</div>
+    <div class="section-subtitle">Four concepts that separate reactive negotiators from strategic ones. Know these cold — they apply to every deal you'll ever do.</div>
+
+    <div class="framework-box teal">
+      <div class="fw-term">BATNA — Best Alternative to a Negotiated Agreement</div>
+      <div class="fw-def">Your walkaway option. The stronger your BATNA, the more leverage you have. Before any negotiation, ask: <em>what do I do if this deal falls apart?</em> If the answer is "nothing good," you need to build alternatives first.</div>
+      <div class="fw-example">D2C example: Before renegotiating with your 3PL, get quotes from two competitors. You don't need to switch — but knowing you could changes the conversation.</div>
+    </div>
+
+    <div class="framework-box coral">
+      <div class="fw-term">ZOPA — Zone of Possible Agreement</div>
+      <div class="fw-def">The overlap between the lowest a seller will accept and the highest a buyer will pay (or vice versa). If there's no ZOPA, no deal happens. Your job is to find it — or create one by adding value on both sides.</div>
+      <div class="fw-example">D2C example: Your influencer wants $8K; your budget tops out at $5K. ZOPA may exist if you offer product equity, extended exclusivity, or a revenue share instead of a flat fee.</div>
+    </div>
+
+    <div class="framework-box purple">
+      <div class="fw-term">Anchoring</div>
+      <div class="fw-def">The first number set in a negotiation has disproportionate influence on the outcome. Whoever anchors first shapes the conversation. When you anchor high (as a seller) or low (as a buyer), you pull the final number in your direction.</div>
+      <div class="fw-example">D2C example: When a vendor asks "what's your budget?" — don't answer directly. Counter with "what's your standard pricing for a company our size?" Anchor only when you've done the research.</div>
+    </div>
+
+    <div class="framework-box blue">
+      <div class="fw-term">Positions vs. Interests</div>
+      <div class="fw-def">A position is what someone says they want. An interest is why they want it. Great negotiators move from positions to interests — it unlocks creative solutions neither side thought of.</div>
+      <div class="fw-example">D2C example: Your supplier's position is "we can't go below $4.50/unit." Their interest might be consistent, predictable volume. Offer a 12-month purchase commitment and you might get $3.80.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <div class="card-label purple">Bonus: The power of silence</div>
+      <div class="card-body">After making an ask or receiving a counter, resist the urge to fill silence. Silence creates social pressure — and the person who speaks next typically gives a concession. Practice pausing for 3–5 seconds after any offer. It's uncomfortable at first. It works every time.</div>
+    </div>
+  </div>
+
+  <!-- Section 2: Preparation -->
+  <div class="section" id="sec2">
+    <div class="section-title">Prep like a pro</div>
+    <div class="section-subtitle">Negotiators who prep for 30 minutes consistently outperform those who rely on charm alone. Here's the pre-negotiation playbook — follow it before every significant conversation.</div>
+
+    <div class="card">
+      <div class="card-label teal">The 6-step prep process</div>
+      <div style="padding-top: 6px;">
+        <div class="prep-step">
+          <div class="prep-num">1</div>
+          <div class="prep-content">
+            <div class="prep-title">Define your ideal outcome, target, and walkaway</div>
+            <div class="prep-desc">Write down three numbers: what you'd love, what you expect, and your hard limit. Never negotiate without knowing your walkaway — or you'll drift past it.</div>
+          </div>
+        </div>
+        <div class="prep-step">
+          <div class="prep-num">2</div>
+          <div class="prep-content">
+            <div class="prep-title">Research their business</div>
+            <div class="prep-desc">Google their company, read their reviews, check LinkedIn for tenure of their team, look at their pricing page. The more you know about their situation, the better you can find their interests.</div>
+          </div>
+        </div>
+        <div class="prep-step">
+          <div class="prep-num">3</div>
+          <div class="prep-content">
+            <div class="prep-title">Build (or strengthen) your BATNA</div>
+            <div class="prep-desc">Get at least one alternative quote or option before the meeting. Even a weak alternative is better than none — it shifts your mindset from "I need this" to "I'm evaluating options."</div>
+          </div>
+        </div>
+        <div class="prep-step">
+          <div class="prep-num">4</div>
+          <div class="prep-content">
+            <div class="prep-title">List your tradeable variables</div>
+            <div class="prep-desc">Price is only one lever. List everything that has value on both sides: payment terms, volume commitments, timelines, exclusivity, referrals, case studies, co-marketing. More variables = more flexibility.</div>
+          </div>
+        </div>
+        <div class="prep-step">
+          <div class="prep-num">5</div>
+          <div class="prep-content">
+            <div class="prep-title">Anticipate their objections</div>
+            <div class="prep-desc">Write out the top 3 things they'll push back on and prepare your response. Nothing kills momentum like being caught off guard by a predictable counter.</div>
+          </div>
+        </div>
+        <div class="prep-step">
+          <div class="prep-num">6</div>
+          <div class="prep-content">
+            <div class="prep-title">Decide who speaks first</div>
+            <div class="prep-desc">If you have strong market data, anchor first. If you're uncertain about their range, let them go first to reveal information. Have a plan — don't improvise this moment.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label amber">Pre-negotiation checklist</div>
+      <ul class="checklist" id="checklist">
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I know my ideal, target, and walkaway numbers</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I've researched the counterpart's business</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I have at least one BATNA identified</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I've listed 5+ tradeable variables beyond price</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I've written out their likely objections and my responses</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I know who will speak first and why</li>
+        <li><span class="check-box" onclick="toggleCheck(this)"></span>I've scheduled the meeting (not rushed it at end of day/quarter)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 3: Scenarios -->
+  <div class="section" id="sec3">
+    <div class="section-title">Real D2C scenarios</div>
+    <div class="section-subtitle">Each scenario below is a situation you'll actually face. Read the setup, consider your approach, then reveal the playbook. Use these for role-play pairs in the session.</div>
+
+    <div class="scenario-card">
+      <div class="scenario-header" onclick="toggleScenario(0)">
+        <span class="scenario-tag tag-vendor">Vendor</span>
+        <span class="scenario-title">Your manufacturer just raised prices 12%</span>
+        <span class="scenario-toggle" id="stog0">&#9660;</span>
+      </div>
+      <div class="scenario-body" id="sbod0">
+        <div class="scenario-context">You've been working with this supplier for 18 months. They've been solid, but just sent a new price sheet citing "raw material inflation." Your margin is already tight, and your CFO is watching. You have a call with them next Tuesday.</div>
+        <div class="scenario-block"><div class="scenario-block-label">Your first move</div><div class="scenario-block-content">Don't accept or reject over email. Get on a call. Ask them to walk you through the cost breakdown — "I want to understand where the increase is coming from." This signals you're engaged, not a pushover, and buys you time and info.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">Tradeable variables</div><div class="scenario-block-content">Extended PO commitment (6–12 months), faster payment terms (Net 15 vs Net 45), co-development of a lower-cost SKU, shifting some volume from them to a second source.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">What to say</div><div class="scenario-block-content">"We value this partnership deeply and want to make it work long-term. Help me understand what flexibility exists — if we commit to X units over the next 12 months, what does that do to the number?"</div></div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header" onclick="toggleScenario(1)">
+        <span class="scenario-tag tag-agency">Agency</span>
+        <span class="scenario-title">Agency wants to raise your retainer 40%</span>
+        <span class="scenario-toggle" id="stog1">&#9660;</span>
+      </div>
+      <div class="scenario-body" id="sbod1">
+        <div class="scenario-context">Your paid media agency has been with you 2 years. They're requesting a significant retainer increase citing team growth and scope creep. You've seen good results, but 40% feels steep. You don't want to start over with a new agency.</div>
+        <div class="scenario-block"><div class="scenario-block-label">Your first move</div><div class="scenario-block-content">Request a scope-of-work audit together. Ask them to itemize what they've delivered vs. what was contracted. Often this surfaces real scope creep — which is a legitimate basis for some increase — and gives you a rational anchor for a counter.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">Tradeable variables</div><div class="scenario-block-content">Scope reduction (remove lower-value work), performance bonus instead of flat increase, longer contract commitment for rate stability, case study rights, referral agreement.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">What to say</div><div class="scenario-block-content">"Before we talk numbers, can we align on what's in scope? I want to make sure we're paying for what we're actually using — and honestly, there might be things we should stop doing entirely. Then let's find a structure that works for both of us."</div></div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header" onclick="toggleScenario(2)">
+        <span class="scenario-tag tag-influencer">Creator</span>
+        <span class="scenario-title">Influencer quotes 3x your budget</span>
+        <span class="scenario-toggle" id="stog2">&#9660;</span>
+      </div>
+      <div class="scenario-body" id="sbod2">
+        <div class="scenario-context">A mid-tier creator (280K followers, strong engagement, perfect demo fit) quoted $9,000 for a single sponsored post + story set. Your typical budget is $2,500–3,500 for this tier. You really want to work with them.</div>
+        <div class="scenario-block"><div class="scenario-block-label">Your first move</div><div class="scenario-block-content">Don't respond with just a lower number. Respond with curiosity: "Love your engagement numbers — before we get into pricing, tell me more about what you're delivering and what's driving your rate." You learn their priorities and find room to move.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">Tradeable variables</div><div class="scenario-block-content">Multi-post / longer-term deal, gifted product + affiliate commission structure, usage rights adjustment, exclusivity waiver, cross-promotion on brand channels, ambassador title.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">What to say</div><div class="scenario-block-content">"We're working with a tighter budget than that for this initial collab, but we see a lot of potential in a longer-term relationship. What if we structured this as a 3-month ambassador arrangement? That often makes the economics work better for both sides."</div></div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header" onclick="toggleScenario(3)">
+        <span class="scenario-tag tag-platform">Platform</span>
+        <span class="scenario-title">Shopify Plus renewal — is there room to negotiate?</span>
+        <span class="scenario-toggle" id="stog3">&#9660;</span>
+      </div>
+      <div class="scenario-body" id="sbod3">
+        <div class="scenario-context">Your Shopify Plus contract renews in 60 days. You're paying the standard rate and no one has ever questioned it. Your GMV has grown significantly — you're now a more attractive merchant. You're also casually evaluating other platforms.</div>
+        <div class="scenario-block"><div class="scenario-block-label">Your first move</div><div class="scenario-block-content">Initiate the conversation early — 60 days before renewal is the window. Request a call with your account manager and frame it as a strategic conversation, not a complaint. Reference your GMV growth as context for the ask.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">Tradeable variables</div><div class="scenario-block-content">Longer contract term (2-3 yr) for a lower monthly rate, credits for Shopify apps or services, migration support waivers, customized platform fee structure, added merchant services.</div></div>
+        <div class="scenario-block"><div class="scenario-block-label">What to say</div><div class="scenario-block-content">"We've scaled significantly with Shopify and we want to stay on the platform long-term. As we look at our renewal, we're also doing a broader vendor review. I'd love to understand what Shopify can offer us given our growth trajectory."</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Phrases + Moves -->
+  <div class="section" id="sec4">
+    <div class="section-title">Words that work</div>
+    <div class="section-subtitle">The difference between "I'll think about it" and a deal often comes down to the exact words you use. Build fluency with these — then make them your own.</div>
+
+    <div class="card-label teal" style="margin-bottom: 8px;">Opening moves</div>
+    <div class="phrase-card"><div class="phrase-icon p-open">O</div><div><div class="phrase-text">"Before we get into pricing, help me understand what's most important to you in this partnership."</div><div class="phrase-sub">Surfaces their interests. Creates goodwill. You learn before you commit.</div></div></div>
+    <div class="phrase-card"><div class="phrase-icon p-open">O</div><div><div class="phrase-text">"What does a typical deal look like for a company our size?"</div><div class="phrase-sub">Gets them to anchor — useful when you don't have strong data.</div></div></div>
+
+    <div class="card-label purple" style="margin: 1rem 0 8px;">Anchoring</div>
+    <div class="phrase-card"><div class="phrase-icon p-anchor">A</div><div><div class="phrase-text">"Based on comparable vendors we've worked with, we'd expect this to land around $X."</div><div class="phrase-sub">Sets an anchor grounded in market data. Hard to dismiss.</div></div></div>
+    <div class="phrase-card"><div class="phrase-icon p-anchor">A</div><div><div class="phrase-text">"We've been quoted X by others — what can you do to earn our business?"</div><div class="phrase-sub">Introduces competition without being aggressive. Works well with SaaS vendors.</div></div></div>
+
+    <div class="card-label amber" style="margin: 1rem 0 8px;">Push back without burning bridges</div>
+    <div class="phrase-card"><div class="phrase-icon p-push">P</div><div><div class="phrase-text">"I appreciate the offer, but I need you to do better than that for us to move forward."</div><div class="phrase-sub">Direct. Pressure without drama. Works in almost every context.</div></div></div>
+    <div class="phrase-card"><div class="phrase-icon p-push">P</div><div><div class="phrase-text">"I'm not in a position to say yes at that number. What flexibility do you have?"</div><div class="phrase-sub">Puts the next move on them. Avoids naming your counter too early.</div></div></div>
+    <div class="phrase-card"><div class="phrase-icon p-push">P</div><div><div class="phrase-text">"Help me get this approved internally — what else can you add to make this a stronger package?"</div><div class="phrase-sub">Classic "higher authority" move. Removes ego from the pushback.</div></div></div>
+
+    <div class="card-label blue" style="margin: 1rem 0 8px;">Closing</div>
+    <div class="phrase-card"><div class="phrase-icon p-close">C</div><div><div class="phrase-text">"If we can land at X, I'm ready to move forward today."</div><div class="phrase-sub">Conditional close. Gives them a clear path to yes.</div></div></div>
+    <div class="phrase-card"><div class="phrase-icon p-close">C</div><div><div class="phrase-text">"Let's make this easy — can we split the difference at X?"</div><div class="phrase-sub">Only use this when the gap is genuinely small and you're both close.</div></div></div>
+
+    <hr class="divider">
+
+    <div class="do-dont">
+      <div class="do-box">
+        <div class="do-label">Say this</div>
+        <div class="do-item">"What I'm hearing is..." (mirrors their concern back)</div>
+        <br>
+        <div class="do-item">"Is there any flexibility on..." (open, non-aggressive)</div>
+        <br>
+        <div class="do-item">"Let me take that back to my team." (buys time, signals deliberation)</div>
+      </div>
+      <div class="dont-box">
+        <div class="dont-label">Not this</div>
+        <div class="dont-item">"That's way too expensive." (emotional, closes doors)</div>
+        <br>
+        <div class="dont-item">"Our budget is $X." (reveals ceiling immediately)</div>
+        <br>
+        <div class="dont-item">"We really need this done by Friday." (signals desperation)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Quiz -->
+  <div class="section" id="sec5">
+    <div class="section-title">Check your instincts</div>
+    <div class="section-subtitle">Three real-world situations. What would you do? There's no shame in being wrong — the debrief is the learning.</div>
+
+    <div class="card" id="q1-card">
+      <div class="card-label teal">Situation 1 of 3</div>
+      <div class="quiz-q">A vendor asks "What's your budget for this?" right at the start of the call. What do you do?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer('q1', this, false, 'Giving your budget upfront anchors the conversation at your ceiling. They will rarely quote below it.')">Tell them honestly — transparency builds trust</button>
+        <button class="quiz-opt" onclick="answer('q1', this, true, 'Correct. Deflecting protects your position and gets them to share their range first. Try: &quot;We&#39;re still finalizing — what does this typically cost for a company our size?&quot;')">Deflect and ask what they typically charge</button>
+        <button class="quiz-opt" onclick="answer('q1', this, false, 'Refusing to share any info can create friction early. Better to redirect with curiosity.')">Tell them you never share your budget</button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+
+    <div class="card" id="q2-card">
+      <div class="card-label purple">Situation 2 of 3</div>
+      <div class="quiz-q">You're negotiating with a 3PL. You really need their warehouse location — no other facility is within 200 miles of your key customers. What's the most important thing to do before the call?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer('q2', this, false, 'Rehearsing can help, but your biggest vulnerability is your lack of alternatives — not your delivery.')">Rehearse your pitch so you sound confident</button>
+        <button class="quiz-opt" onclick="answer('q2', this, true, 'Correct. Your BATNA is nonexistent right now. Even a weak alternative — a different location, a slower option — changes your leverage and your mindset. Build one before you negotiate.')">Find at least one alternative — even a weak one</button>
+        <button class="quiz-opt" onclick="answer('q2', this, false, 'Leading with urgency signals desperation. They&#39;ll use your timeline against you.')">Let them know your urgency so they prioritize you</button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+
+    <div class="card" id="q3-card">
+      <div class="card-label amber">Situation 3 of 3</div>
+      <div class="quiz-q">You make a counter-offer. The vendor goes quiet for 8 seconds. What do you do?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer('q3', this, false, 'This is the classic mistake — you just negotiated against yourself. Silence is their discomfort, not yours to fix.')">Fill the silence — add another concession to sweeten the deal</button>
+        <button class="quiz-opt" onclick="answer('q3', this, false, 'Withdrawing doesn&#39;t make sense yet. Let the silence do its work.')">Withdraw the offer — clearly they don&#39;t like it</button>
+        <button class="quiz-opt" onclick="answer('q3', this, true, 'Correct. Silence after an offer is pressure — and it&#39;s on them, not you. Whoever speaks first typically concedes. Hold the pause.')">Stay quiet. Let the silence work for you.</button>
+      </div>
+      <div class="quiz-feedback" id="q3-fb"></div>
+    </div>
+  </div>
+
+  <!-- Section 6: Takeaways -->
+  <div class="section" id="sec6">
+    <div class="section-title">Your negotiation starter kit</div>
+    <div class="section-subtitle">Leave today with three things: a mindset shift, a habit to start, and one thing to do before your next negotiation.</div>
+
+    <div class="card">
+      <div class="card-label teal">The mindset shift</div>
+      <div class="card-body">Every negotiation is a problem to solve together — not a battle to win. The best deals feel good to both sides. When you approach it collaboratively, you get more creative solutions, longer-lasting relationships, and fewer reversals after the deal closes.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label purple">The habit to start this week</div>
+      <div class="card-body">Before your next vendor call or rate conversation — any one — spend 15 minutes writing down your ideal, target, and walkaway numbers. Just that. It takes 15 minutes and it will immediately make you a better negotiator.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label amber">Your homework</div>
+      <div class="card-body">Identify one negotiation you've been avoiding or accepting without question. Map out your BATNA, your tradeable variables, and your opening move. Bring it to the next peer session and we'll workshop it together.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <div class="card-label blue">Recommended reading for the curious</div>
+      <div class="card-body">
+        <ul>
+          <li><em>Never Split the Difference</em> — Chris Voss (FBI negotiator tactics, very practical)</li>
+          <li><em>Getting to Yes</em> — Fisher & Ury (the positions vs. interests classic)</li>
+          <li><em>Negotiation Genius</em> — Malhotra & Bazerman (rigorous, great for B2B contexts)</li>
+          <li><em>Influence</em> — Robert Cialdini (the psychology behind why people say yes)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box"><span class="tip-label">Facilitator note:</span> Close the session with a round-robin: each person names one negotiation they'll approach differently after today. Accountability makes the learning stick.</div>
+  </div>
+
+  <div class="nav-bottom">
+    <button class="nav-btn" id="btnPrev" onclick="goTo(currentSection - 1)" disabled>&#8592; Back</button>
+    <div class="progress-dots" id="progressDots"></div>
+    <button class="nav-btn primary" id="btnNext" onclick="goTo(currentSection + 1)">Next &#8594;</button>
+  </div>
+</div>
+
+<script>
+let currentSection = 0;
+const totalSections = 7;
+
+function buildDots() {
+  const c = document.getElementById('progressDots');
+  c.innerHTML = '';
+  for (let i = 0; i < totalSections; i++) {
+    const d = document.createElement('div');
+    d.className = 'progress-dot' + (i < currentSection ? ' done' : i === currentSection ? ' active' : '');
+    c.appendChild(d);
+  }
+}
+
+function goTo(idx) {
+  if (idx < 0 || idx >= totalSections) return;
+  document.getElementById('sec' + currentSection).classList.remove('active');
+  document.querySelectorAll('.nav-tab')[currentSection].classList.remove('active');
+  currentSection = idx;
+  document.getElementById('sec' + currentSection).classList.add('active');
+  document.querySelectorAll('.nav-tab')[currentSection].classList.add('active');
+  document.getElementById('btnPrev').disabled = currentSection === 0;
+  document.getElementById('btnNext').disabled = currentSection === totalSections - 1;
+  buildDots();
+  document.querySelector('.neg-root').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+buildDots();
+
+function toggleScenario(idx) {
+  const body = document.getElementById('sbod' + idx);
+  const tog = document.getElementById('stog' + idx);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  tog.classList.toggle('open', !isOpen);
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  if (el.classList.contains('checked')) el.textContent = '✓';
+  else el.textContent = '';
+}
+
+function answer(qid, btn, correct, msg) {
+  const opts = btn.parentElement.querySelectorAll('.quiz-opt');
+  opts.forEach(o => { o.disabled = true; });
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  const fb = document.getElementById(qid + '-fb');
+  fb.textContent = msg;
+  fb.className = 'quiz-feedback show ' + (correct ? 'win' : 'lose');
+}
+</script>
